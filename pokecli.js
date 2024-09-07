@@ -12,18 +12,19 @@ art.font('POKECLI', 'Doom', (err, rendered) => {
     console.error('Error generating ASCII art:', err);
   } else {
     const lines = rendered.split('\n');
-    lines.forEach((line, index) => {
-      setTimeout(() => {
-        const middle = Math.floor(line.length / 2);
-        const firstHalf = line.slice(0, middle);  
-        const secondHalf = line.slice(middle);
-        console.log(chalk.redBright(firstHalf) + chalk.whiteBright(secondHalf));
-      }, index * 100); // Print each line with a slight delay
-    });
+    lines.forEach(line => {
+      const middle = Math.floor(line.length / 2);
+      const firstHalf = line.slice(0, middle);  
+      const secondHalf = line.slice(middle);
+      
+      
+      console.log(chalk.redBright(firstHalf) + chalk.whiteBright(secondHalf));
+    }) 
   }
   
   queryUser();
 });
+
 
 
 
