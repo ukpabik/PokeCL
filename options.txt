@@ -1,0 +1,12 @@
+
+Tools:
+
+pokemon: Asks user what pokemon they want info on.
+ability: Asks user what ability they want info on.
+type: Asks user what type they want info on.
+typelist: Lists all available types.
+back: Returns to start.
+help: Brings up the help menu.
+exit: Stops the process.
+
+When searching for something, make sure to use '-' or a dash for a space.
