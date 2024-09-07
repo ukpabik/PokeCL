@@ -28,18 +28,18 @@ Make sure you have **Node.js** installed (version 18 or higher). You can downloa
 
 1. Open your terminal or command prompt.
 2. Clone this project by running the following command:
-   ```bash
-   git clone https://github.com/yourusername/PokeCLI.git
-   cd PokeCLI
-  ```
+```bash
+git clone https://github.com/yourusername/PokeCLI.git
+cd PokeCLI
+```
 2. **Install Dependencies**: Ensure you have Node v18 or higher. Check by running the command: node -v.
-  ```bash
-  npm install
-  ```
+```bash
+npm install
+```
 3. **Run the app**:
-  ```bash
-  npm start
-  ```
+```bash
+npm start
+```
 You will see the colorful PokeCLI title in your terminal, and you’ll be prompted to explore Pokémon data.
 
 ## Usage
