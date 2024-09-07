@@ -1,19 +1,14 @@
 # PokeCLI
 
-Welcome to **PokeCLI**! This is a terminal-based Pokémon application that provides information on Pokémon, their types, and abilities. PokeCLI uses colorful ASCII art to enhance your experience while fetching data from the Pokémon API. This project is entirely my work, and I welcome any feedback or suggestions for improvement.
+Welcome to **PokeCLI** – your personal Pokémon tool in the terminal! 🚀🌟 PokeCLI makes it super easy to get quick info on Pokémon, their types, and abilities. Whether you're battling with friends or need a fast way to check stats, this app solves that problem. Plus, with colorful ASCII art, it adds a bit of fun to your terminal experience!
 
 ## Table of Contents
 
-- [Overview](#overview)
 - [Features](#features)
 - [Installation](#installation)
 - [Running the Application](#running-the-application)
 - [Commands](#commands)
 - [Dependencies](#dependencies)
-
-## Overview
-
-**PokeCLI** is a command-line interface that allows users to explore the world of Pokémon. It connects to the **PokéAPI** to provide up-to-date information on Pokémon, their types, and abilities. The application is designed to run in your terminal and features colorful ASCII art for a fun and interactive experience.
 
 ## Features
 
@@ -52,21 +47,23 @@ You will see the colorful PokeCLI title in your terminal, and you’ll be prompt
 Once you've started the app by running `npm start`, you can interact with the Pokémon world via the terminal. Here are some commands you can use:
 
 - **help**: Displays a help menu with available commands.
+- **typelist**: Displays a list of all available types.
 - **type**: Prompts you to input a Pokémon type and provides information on its damage relations (e.g., weaknesses and resistances).
 - **pokemon**: Prompts you to enter a Pokémon name to retrieve its stats, abilities, and types, along with an ASCII art sprite.
 - **ability**: Prompts you to input a Pokémon ability name and displays its description and effects.
+- **back**: Takes you back to the main menu.
 - **exit**: Exit the program.
 
 ### Examples:
 
 1. **Get Pokémon Information**:
-   Type `pokemon` and then enter a Pokémon name (e.g., `pikachu`). The app will display Pikachu’s stats, abilities, and types along with a colorful ASCII sprite.
+   Type `pokemon` and then enter a Pokémon name (e.g., `pikachu`). The app will display Pikachu’s stats, abilities, and types along with a colorful ASCII sprite. Ex: pokemon pikachu -> all info on pikachu
 
 2. **Get Type Information**:
-   Type `type` and then enter a Pokémon type (e.g., `fire`). You will see how the Fire type interacts with other types (e.g., what it is strong or weak against).
+   Type `type` and then enter a Pokémon type (e.g., `fire`). You will see how the Fire type interacts with other types (e.g., what it is strong or weak against). Ex: type fire -> all info on fire type
 
 3. **Learn about Abilities**:
-   Type `ability` and then enter a Pokémon ability (e.g., `intimidate`). The app will display the ability’s effect and a brief description.
+   Type `ability` and then enter a Pokémon ability (e.g., `intimidate`). The app will display the ability’s effect and a brief description. Ex: ability intimidate -> all info on intimidate ability
 
 ## Dependencies
 
