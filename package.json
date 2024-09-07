@@ -1,18 +1,21 @@
 {
   "name": "pokecli",
   "version": "1.0.0",
-  "description": "",
   "type": "module",
   "main": "pokecli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon pokecli.js"
+    "start": "node pokecli.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "ascii-art": "^2.8.5",
+    "chalk": "^5.3.0",
+    "color-thief-node": "^1.0.4",
     "pokedex-promise-v2": "^4.2.0"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }

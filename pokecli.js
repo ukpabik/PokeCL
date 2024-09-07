@@ -1,9 +1,31 @@
+import readline from 'node:readline';
+import fs from 'node:fs';
+import Pokedex from 'pokedex-promise-v2';
+import art from 'ascii-art';
+import chalk from 'chalk';
+import { getColorFromURL } from 'color-thief-node';
 
-import { exitCode } from 'node:process';
-import readline from 'node:readline'
-import fs from 'node:fs'
-import Pokedex from 'pokedex-promise-v2'
-import art from 'ascii-art'
+
+//DISPLAY TITLE AT THE START
+art.font('POKECLI', 'Doom', (err, rendered) => {
+  if (err) {
+    console.error('Error generating ASCII art:', err);
+  } else {
+    const lines = rendered.split('\n');
+    lines.forEach(line => {
+      const middle = Math.floor(line.length / 2);
+      const firstHalf = line.slice(0, middle);  
+      const secondHalf = line.slice(middle);
+      
+      
+      console.log(chalk.redBright(firstHalf) + chalk.whiteBright(secondHalf));
+    }) 
+  }
+  
+  queryUser();
+});
+
+
 
 
 
@@ -15,7 +37,30 @@ const p = new Pokedex();
 let helpMenu = '';
 let typeList = [];
 
+//FUNCTIONS FOR TEXT COLOR
+const brightenColor = (color, factor) => {
+  return color.map(value => Math.min(255, Math.floor(value * factor)));
+};
 
+// ADJUSTING COLOR
+const getBrighterColor = (dominantColor) => {
+  const brightness = getBrightness(dominantColor);
+  const threshold = 128;  
+
+  
+  if (brightness < threshold) {
+    const brightenedColor = brightenColor(dominantColor, 1.5);  
+    return chalk.rgb(brightenedColor[0], brightenedColor[1], brightenedColor[2]);
+  }
+
+ 
+  return chalk.rgb(dominantColor[0], dominantColor[1], dominantColor[2]);
+};
+
+
+const getBrightness = (color) => {
+  return (0.299 * color[0]) + (0.587 * color[1]) + (0.114 * color[2]);
+};
 
 
 
@@ -54,28 +99,51 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-const typeQuestion = (prompt) => {
-  rl.question(prompt, (res) => {
-    const ans = res.toLowerCase()
-    if (ans === 'exit'){
-      rl.close()
-    }
-    else if (ans === 'back'){
+//TYPE QUESTION
+const typeQuestion = async (prompt) => {
+  rl.question(prompt, async (res) => {
+    const ans = res.toLowerCase();
+    if (ans === 'exit') {
+      rl.close();
+    } else if (ans === 'back') {
       queryUser();
-    }
-    else{
-      p.getTypeByName(ans).then(response => {
-        const damageData = response.damage_relations;
-        const start = '| ';
-        const damageInfo = {
-          doubleFrom: start,
-          doubleTo: start,
-          halfFrom: start,
-          halfTo: start,
-          noFrom: start,
-          noTo: start
+    } else {
+      try {
+        // GET RESPONSE FOR TYPE NAME
+        const response = await p.getTypeByName(ans);
+
+        // FINDING FIRST VALID ICON FOR DOMINANT COLOR
+        const findValidNameIcon = (sprites) => {
+          return Object.values(sprites)
+            .flatMap(generation => Object.values(generation))  // Flatten the object
+            .find(icon => icon.name_icon !== null)?.name_icon; // Find the first valid name_icon
+        };
+
+        // FIND VALID URL
+        const nameIconUrl = findValidNameIcon(response.sprites);
+
+        if (!nameIconUrl) {
+          console.log('No valid name_icon found.');
+          typeQuestion(prompt);
+          return;
         }
-  
+
+        // GET DOMINANT COLOR FROM SPRITE ICON
+        const dominantColor = await getColorFromURL(nameIconUrl);
+
+        // USE CHALK RGB TO GET THE COLOR
+        const titleColor = getBrighterColor(dominantColor);
+
+        const damageData = response.damage_relations;
+        const damageInfo = {
+          doubleFrom: '| ',
+          doubleTo: '| ',
+          halfFrom: '| ',
+          halfTo: '| ',
+          noFrom: '| ',
+          noTo: '| '
+        };
+
         const damageMapping = {
           double_damage_from: 'doubleFrom',
           double_damage_to: 'doubleTo',
@@ -84,102 +152,122 @@ const typeQuestion = (prompt) => {
           no_damage_from: 'noFrom',
           no_damage_to: 'noTo'
         };
-  
+
+        // GET ALL DAMAGE INFO
         Object.keys(damageMapping).forEach((key) => {
           damageData[key].forEach((type) => {
             damageInfo[damageMapping[key]] += type.name + ' | ';
           });
         });
-  
-        
-        console.log('\nDouble damage from: ' + damageInfo.doubleFrom + '\n');
-        console.log('Double damage to: ' + damageInfo.doubleTo + '\n');
-        console.log('Half damage from: ' + damageInfo.halfFrom + '\n');
-        console.log('Half damage to: ' + damageInfo.halfTo + '\n');
-        console.log('No damage from: ' + damageInfo.noFrom + '\n');
-        console.log('No damage to: ' + damageInfo.noTo + '\n');
-  
-        typeQuestion(prompt)
-  
-      }).catch((err) => {
-        console.error('Invalid type')
-        typeQuestion(prompt)
-      })
-    }
-    
-    
-  })
-}
 
-const pokeQuestion = (prompt) => {
-  rl.question(prompt, (res) => {
-    const ans = res.toLowerCase()
-    if (ans === 'exit'){
-      rl.close()
+        // OUTPUT ALL INFO WITH DOMINANT COLOR
+        console.log(titleColor(`\n=== ${ans.toUpperCase()} Type Damage Info ===\n`));
+        console.log(titleColor('Double damage from: ' + damageInfo.doubleFrom + '\n'));
+        console.log(titleColor('Double damage to: ' + damageInfo.doubleTo + '\n'));
+        console.log(titleColor('Half damage from: ' + damageInfo.halfFrom + '\n'));
+        console.log(titleColor('Half damage to: ' + damageInfo.halfTo + '\n'));
+        console.log(titleColor('No damage from: ' + damageInfo.noFrom + '\n'));
+        console.log(titleColor('No damage to: ' + damageInfo.noTo + '\n'));
+
+        // REPROMPT
+        typeQuestion(prompt);
+      } catch (err) {
+        console.error('Invalid type:', err);
+        typeQuestion(prompt);
+      }
     }
-    else if (ans === 'back'){
+  });
+};
+
+//POKEMON QUESTION
+const pokeQuestion = async (prompt) => {
+  rl.question(prompt, async (res) => {
+    const ans = res.toLowerCase();
+    if (ans === 'exit') {
+      rl.close();
+    } else if (ans === 'back') {
       queryUser();
-    }
-    else{
-      p.getPokemonByName(ans).then(response => {
-
-
-        //TODO: LOGIC FOR GETTING POKEMON
-        //INCLUDE TYPES, BASE STATS, NAME, VERSIONS, WEIGHT, MOVES** (maybe)
+    } else {
+      try {
+        const response = await p.getPokemonByName(ans);
+        
         const info = [{
-          name: response.name,
+          name: response.name.toUpperCase(),
           abilities: [],
           pokeTypes: [],
           pokeStats: [],
-          weight: response.weight,
-          pokeSprite: response.sprites.front_default
-        }]
+          weight: response.weight
+        }];
 
         response.abilities.forEach((ability) => {
-          info[0].abilities.push(ability.ability.name)
-        })
+          info[0].abilities.push(ability.ability.name);
+        });
 
         response.types.forEach((type) => {
-          info[0].pokeTypes.push(type.type.name)
-        })
+          info[0].pokeTypes.push(type.type.name);
+        });
 
         response.stats.forEach((stat) => {
           info[0].pokeStats.push({
             name: stat.stat.name,
             base: stat.base_stat
-          })
-        })
+          });
+        });
 
+        const pokeSprite = response.sprites.front_default;
+
+        // GET THE DOMINANT COLOR FROM THE SPRITE IMAGE
+        const dominantColor = await getColorFromURL(pokeSprite);
+        //PASS IT TO THE CHALK RGB
+        const titleColor = getBrighterColor(dominantColor);
         
 
-        //DISPLAYING SPRITE WITH ASCII
+
+        //PRINT ASCII IMAGE OF POKESPRITE
         art.image({
-          filepath: info[0].pokeSprite,
+          filepath: pokeSprite,
           width: 100,
-          alphabet: 'hatching'
+          alphabet: 'greyscale'
         }).then(rendered => {
           console.log(rendered);
-          info.forEach((element) => {
-            console.log(element);
+          
+          // PRINT THE NAME OF POKEMON WITH DOMINANT COLOR
+          console.log(titleColor.visible(`\n=== ${info[0].name} ===\n`));
+          console.log(chalk.green(`Weight: ${info[0].weight} lbs\n`));
+          
+          console.log(chalk.yellow('Abilities:'));
+          info[0].abilities.forEach((ability) => {
+            console.log(chalk.cyan(`- ${ability}`));
           });
+
+          console.log(chalk.yellow('\nTypes:'));
+          info[0].pokeTypes.forEach((type) => {
+            console.log(chalk.magenta(`- ${type}`));
+          });
+
+          console.log(chalk.yellow('\nStats:'));
+          info[0].pokeStats.forEach((stat) => {
+            console.log(chalk.red(`${stat.name}: ${stat.base}`));
+          });
+
           pokeQuestion(prompt);
         }).catch(err => {
           console.error('Could not render sprite.');
           art.font(info[0].name, 'Doom', function(rendered){
-            console.log(rendered);
+            console.log(chalk.blue.bold(rendered));
             pokeQuestion(prompt);
           });
         });
-
-        
-      }).catch((err) => {
-        console.error('Invalid pokemon')
-        pokeQuestion(prompt)
-      })
+      } catch (err) {
+        console.error('Invalid Pokémon or issue fetching data:', err);
+        pokeQuestion(prompt);
+      }
     }
-  })
-}
+  });
+};
 
+
+//ABILITY QUESTION
 const abilityQuestion = (prompt) => {
   rl.question(prompt, (res) => {
     const ans = res.toLowerCase()
@@ -191,27 +279,22 @@ const abilityQuestion = (prompt) => {
     }
     else{
       p.getAbilityByName(ans).then(response => {
-
         const info = {
-          name: `${response.name}`,
-          description: `${response.effect_entries
-          .filter((entry) => entry.language.name === 'en')[0].effect
-          .replace(/\n/g, ' ')}`
-
-        }
-        
-        
-        for (const element in info){
-          console.log(`\n${element}: ${info[element]}`)
-        }
-        console.log('\n')
-
-        
-        abilityQuestion(prompt)
+          name: response.name.toUpperCase(),
+          description: response.effect_entries
+            .filter((entry) => entry.language.name === 'en')[0]
+            .effect.replace(/\n/g, ' ')
+        };
+      
+        console.log('\n=== Ability Info ===');
+        console.log(`\nName: ${info.name}\n`);
+        console.log(`Description: ${info.description}\n`);
+      
+        abilityQuestion(prompt);
       }).catch((err) => {
-        console.error('Invalid ability')
-        abilityQuestion(prompt)
-      })
+        console.error('Invalid ability');
+        abilityQuestion(prompt);
+      });
     }
     
   })
