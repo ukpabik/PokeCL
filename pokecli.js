@@ -7,7 +7,7 @@ import { getColorFromURL } from 'color-thief-node';
 
 
 //DISPLAY TITLE AT THE START
-art.font('POKECLI', 'Doom', (err, rendered) => {
+art.font('POKECLPOKECLI', 'Doom', (err, rendered) => {
   if (err) {
     console.error('Error generating ASCII art:', err);
   } else {
