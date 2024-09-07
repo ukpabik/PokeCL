@@ -29,7 +29,7 @@ Make sure you have **Node.js** installed (version 18 or higher). You can downloa
 1. Open your terminal or command prompt.
 2. Clone this project by running the following command:
 ```bash
-git clone https://github.com/yourusername/PokeCLI.git
+git clone https://github.com/ukpabik/PokeCLI.git
 cd PokeCLI
 ```
 2. **Install Dependencies**: Ensure you have Node v18 or higher. Check by running the command: node -v.
