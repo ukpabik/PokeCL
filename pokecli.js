@@ -9,10 +9,10 @@ import { getColorFromURL } from 'color-thief-node';
 //DISPLAY TITLE AT THE START
 art.font('POKECLI', 'Doom', (err, rendered) => {
   if (err) {
-    console.error('Error generating ASCII art:', err);
+      console.error('Error generating ASCII art:', err);
   } else {
-    console.log(chalk.redBright(rendered));
-    }) 
+      console.log(chalk.redBright(rendered));
+    
   }
   
   queryUser();
