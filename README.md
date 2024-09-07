@@ -57,13 +57,13 @@ Once you've started the app by running `npm start`, you can interact with the Po
 ### Examples:
 
 1. **Get Pokémon Information**:
-   Type `pokemon` and then enter a Pokémon name (e.g., `pikachu`). The app will display Pikachu’s stats, abilities, and types along with a colorful ASCII sprite. Ex: pokemon pikachu -> all info on pikachu
+   Type `pokemon` and then enter a Pokémon name (e.g., `pikachu`). The app will display Pikachu’s stats, abilities, and types along with a colorful ASCII sprite. Ex: pokemon -> pikachu -> all info on pikachu
 
 2. **Get Type Information**:
-   Type `type` and then enter a Pokémon type (e.g., `fire`). You will see how the Fire type interacts with other types (e.g., what it is strong or weak against). Ex: type fire -> all info on fire type
+   Type `type` and then enter a Pokémon type (e.g., `fire`). You will see how the Fire type interacts with other types (e.g., what it is strong or weak against). Ex: type -> fire -> all info on fire type
 
 3. **Learn about Abilities**:
-   Type `ability` and then enter a Pokémon ability (e.g., `intimidate`). The app will display the ability’s effect and a brief description. Ex: ability intimidate -> all info on intimidate ability
+   Type `ability` and then enter a Pokémon ability (e.g., `intimidate`). The app will display the ability’s effect and a brief description. Ex: ability -> intimidate -> all info on intimidate ability
 
 ## Dependencies
 
