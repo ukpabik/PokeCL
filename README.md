@@ -6,7 +6,7 @@ Welcome to **PokeCLI** – your personal Pokémon tool in the terminal! 🚀🌟
 
 - [Features](#features)
 - [Installation](#installation)
-- [Running the Application](#running-the-application)
+- [Demo](#demo)
 - [Commands](#commands)
 - [Dependencies](#dependencies)
 
@@ -42,8 +42,8 @@ npm start
 ```
 You will see the colorful PokeCLI title in your terminal, and you’ll be prompted to explore Pokémon data.
 
-##Demo
-[![Demo](/pokecli-demo.mp4)](/pokecli-demo.mp4)
+## Demo
+[![Demo](https://github.com/user-attachments/assets/b5a07a9f-b069-43b8-b44f-d23360000495)
 
 ## Usage
 
@@ -69,10 +69,6 @@ Once you've started the app by running `npm start`, you can interact with the Po
    Type `ability` and then enter a Pokémon ability (e.g., `intimidate`). The app will display the ability’s effect and a brief description. Ex: ability -> intimidate -> all info on intimidate ability
 
 ## Dependencies
-
-
-https://github.com/user-attachments/assets/b5a07a9f-b069-43b8-b44f-d23360000495
-
 
 - **PokéAPI**: Provides Pokémon data.
 - **ascii-art**: For generating colorful ASCII art in the terminal.
