@@ -43,7 +43,7 @@ npm start
 You will see the colorful PokeCLI title in your terminal, and you’ll be prompted to explore Pokémon data.
 
 ## Demo
-[![Demo](https://github.com/user-attachments/assets/b5a07a9f-b069-43b8-b44f-d23360000495)
+[![Demo](https://github.com/user-attachments/assets/76b42b61-8c4b-4748-9087-ac75213c1911)
 
 ## Usage
 
