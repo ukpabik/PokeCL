@@ -42,6 +42,9 @@ npm start
 ```
 You will see the colorful PokeCLI title in your terminal, and you’ll be prompted to explore Pokémon data.
 
+##Demo
+[Demo](/pokecli-demo.mp4)
+
 ## Usage
 
 Once you've started the app by running `npm start`, you can interact with the Pokémon world via the terminal. Here are some commands you can use:
