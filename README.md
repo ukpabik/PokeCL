@@ -70,6 +70,10 @@ Once you've started the app by running `npm start`, you can interact with the Po
 
 ## Dependencies
 
+
+https://github.com/user-attachments/assets/b5a07a9f-b069-43b8-b44f-d23360000495
+
+
 - **PokéAPI**: Provides Pokémon data.
 - **ascii-art**: For generating colorful ASCII art in the terminal.
 - **chalk**: For adding colors to terminal outputs.
