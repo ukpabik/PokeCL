@@ -46,7 +46,7 @@ You will see the colorful PokeCLI title in your terminal, and you’ll be prompt
 
 https://github.com/user-attachments/assets/9bbd9941-596a-4dc4-a1c1-eb5e473edbb5
 
-## Usage
+## Commands
 
 Once you've started the app by running `npm start`, you can interact with the Pokémon world via the terminal. Here are some commands you can use:
 
