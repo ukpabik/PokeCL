@@ -328,11 +328,11 @@ const moveQuestion = (prompt) => {
 
         console.log(getTypeColor(info.type)(`\n=== ${info.name} ===\n`));
         console.log(getTypeColor(info.type)(`Type        : ${info.type}`));
-        console.log(chalk.blue(`Power       : ${info.power}`));
-        console.log(chalk.green(`Accuracy    : ${info.accuracy}`));
-        console.log(chalk.magenta(`PP          : ${info.pp}`));
-        console.log(chalk.yellow(`Priority    : ${info.priority}`));
-        console.log(chalk.red(`Description : ${info.desc}`));
+        console.log(chalk.blueBright(`Power       : ${info.power}`));
+        console.log(chalk.greenBright(`Accuracy    : ${info.accuracy}`));
+        console.log(chalk.magentaBright(`PP          : ${info.pp}`));
+        console.log(chalk.yellowBright(`Priority    : ${info.priority}`));
+        console.log(chalk.redBright(`Description : ${info.desc}`));
         console.log(getTypeColor(info.type)('\n=====================\n'));
         moveQuestion(prompt);
       })
