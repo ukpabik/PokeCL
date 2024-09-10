@@ -6,7 +6,7 @@ Welcome to **PokeCLI** – your personal Pokémon tool in the terminal! 🚀🌟
 
 - [Features](#features)
 - [Installation](#installation)
-- [Running the Application](#running-the-application)
+- [Demo](#demo)
 - [Commands](#commands)
 - [Dependencies](#dependencies)
 
@@ -41,6 +41,10 @@ npm install
 npm start
 ```
 You will see the colorful PokeCLI title in your terminal, and you’ll be prompted to explore Pokémon data.
+
+## Demo
+
+https://github.com/user-attachments/assets/9bbd9941-596a-4dc4-a1c1-eb5e473edbb5
 
 ## Usage
 
