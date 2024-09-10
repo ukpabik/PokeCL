@@ -44,7 +44,7 @@ You will see the colorful PokeCLI title in your terminal, and you’ll be prompt
 
 ## Demo
 
-https://github.com/user-attachments/assets/30538cca-88a2-4db2-8d17-790f5f9f707c
+https://github.com/user-attachments/assets/9bbd9941-596a-4dc4-a1c1-eb5e473edbb5
 
 ## Usage
 
