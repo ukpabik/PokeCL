@@ -4,6 +4,7 @@ Tools:
 pokemon: Asks user what pokemon they want info on.
 ability: Asks user what ability they want info on.
 type: Asks user what type they want info on.
+move: Asks the user what move they want info on.
 typelist: Lists all available types.
 back: Returns to start.
 help: Brings up the help menu.

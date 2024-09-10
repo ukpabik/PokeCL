@@ -301,6 +301,49 @@ const abilityQuestion = (prompt) => {
   })
 }
 
+//MOVE QUESTION
+const moveQuestion = (prompt) => {
+  rl.question(prompt, (res) => {
+    const ans = res.toLowerCase();
+    if (ans === 'exit'){
+      rl.close()
+    }
+    else if (ans === 'back'){
+      queryUser();
+    }
+    else{
+      p.getMoveByName(ans).then(response => {
+
+        const description = response.flavor_text_entries.filter((entry) => entry.language.name === 'en');
+        const info = {
+          name: response.name.toUpperCase(),
+          power: response.power,
+          pp: response.pp,
+          priority: response.priority,
+          type: response.type.name,
+          accuracy: response.accuracy,
+          desc: description[description.length - 1].flavor_text
+
+        }
+
+        console.log(getTypeColor(info.type)(`\n=== ${info.name} ===\n`));
+        console.log(getTypeColor(info.type)(`Type        : ${info.type}`));
+        console.log(chalk.blue(`Power       : ${info.power}`));
+        console.log(chalk.green(`Accuracy    : ${info.accuracy}`));
+        console.log(chalk.magenta(`PP          : ${info.pp}`));
+        console.log(chalk.yellow(`Priority    : ${info.priority}`));
+        console.log(chalk.red(`Description : ${info.desc}`));
+        console.log(getTypeColor(info.type)('\n=====================\n'));
+        moveQuestion(prompt);
+      })
+      .catch(err => {
+        console.log('Invalid move');
+        moveQuestion(prompt);
+      })
+    }
+  })
+}
+
 
 
 
@@ -318,7 +361,9 @@ const question = (query) => {
     case 'pokemon':
       pokeQuestion(prompt)
       break;
-    
+    case 'move':
+      moveQuestion(prompt);
+      break;
 
   }
 }
@@ -350,6 +395,9 @@ const queryUser = () => {
         case 'ability':
           question('ability')
           break;
+        case 'move':
+          question('move');
+          break;
         
       }
       queryUser();
@@ -362,4 +410,27 @@ const queryUser = () => {
 
 
 
-
+// FUNCTION TO GET TYPES (HARDCODED)
+function getTypeColor(type) {
+  switch (type) {
+    case 'normal': return chalk.hex('#A8A77A');
+    case 'fire': return chalk.hex('#EE8130');
+    case 'water': return chalk.hex('#6390F0');
+    case 'electric': return chalk.hex('#F7D02C');
+    case 'grass': return chalk.hex('#7AC74C');
+    case 'ice': return chalk.hex('#96D9D6');
+    case 'fighting': return chalk.hex('#C22E28');
+    case 'poison': return chalk.hex('#A33EA1');
+    case 'ground': return chalk.hex('#964B00');
+    case 'flying': return chalk.hex('#A98FF3');
+    case 'psychic': return chalk.hex('#F95587');
+    case 'bug': return chalk.hex('#A6B91A');
+    case 'rock': return chalk.hex('#B6A136');
+    case 'ghost': return chalk.hex('#735797');
+    case 'dragon': return chalk.hex('#6F35FC');
+    case 'dark': return chalk.hex('#705746');
+    case 'steel': return chalk.hex('#B7B7CE');
+    case 'fairy': return chalk.hex('#D685AD');
+    default: return chalk.white;
+  }
+}
