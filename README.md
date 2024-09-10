@@ -71,7 +71,7 @@ Once you've started the app by running `npm start`, you can interact with the Po
    Type `ability` and then enter a Pokémon ability (e.g., `intimidate`). The app will display the ability’s effect and a brief description. Ex: ability -> intimidate -> all info on intimidate ability
    
 3. **Learn about Moves**:
-   Type `move` and then enter a Pokémon move (e.g., `water-gun`). The app will display the ability’s effect and a brief description. Ex: move -> water-gun -> all info on water-gun move
+   Type `move` and then enter a Pokémon move (e.g., `water-gun`). The app will display the move’s use and a brief description, with stats. Ex: move -> water-gun -> all info on water-gun move
 
 ## Dependencies
 
