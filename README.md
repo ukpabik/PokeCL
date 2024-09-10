@@ -46,14 +46,15 @@ You will see the colorful PokeCLI title in your terminal, and you’ll be prompt
 
 https://github.com/user-attachments/assets/9bbd9941-596a-4dc4-a1c1-eb5e473edbb5
 
-## Usage
+## Commands
 
 Once you've started the app by running `npm start`, you can interact with the Pokémon world via the terminal. Here are some commands you can use:
 
 - **help**: Displays a help menu with available commands.
 - **typelist**: Displays a list of all available types.
 - **type**: Prompts you to input a Pokémon type and provides information on its damage relations (e.g., weaknesses and resistances).
-- **pokemon**: Prompts you to enter a Pokémon name to retrieve its stats, abilities, and types, along with an ASCII art sprite.
+- **move**: Prompts you to input a Pokémon move and provides information on its stats and typing.
+- **pokemon**: Prompts you to input a Pokémon name to retrieve its stats, abilities, and types, along with an ASCII art sprite.
 - **ability**: Prompts you to input a Pokémon ability name and displays its description and effects.
 - **back**: Takes you back to the main menu.
 - **exit**: Exit the program.
@@ -68,6 +69,9 @@ Once you've started the app by running `npm start`, you can interact with the Po
 
 3. **Learn about Abilities**:
    Type `ability` and then enter a Pokémon ability (e.g., `intimidate`). The app will display the ability’s effect and a brief description. Ex: ability -> intimidate -> all info on intimidate ability
+   
+3. **Learn about Moves**:
+   Type `move` and then enter a Pokémon move (e.g., `water-gun`). The app will display the move’s use and a brief description, with stats. Ex: move -> water-gun -> all info on water-gun move
 
 ## Dependencies
 
